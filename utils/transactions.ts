@@ -237,8 +237,8 @@ export const transferCUSD = async ({ userAddress }: Props) => {
   const provider = new BrowserProvider(window.ethereum);
 
   // Get the signer from the provider
-  try {
-    const signer = await provider.getSigner(userAddress);
+
+    const signer = await provider.getSigner();
     // Request user permission to interact with their wallet (MetaMask)
     // await window.ethereum.enable();
 
@@ -254,14 +254,14 @@ export const transferCUSD = async ({ userAddress }: Props) => {
     // Wait for the transaction to be mined
     const receipt = await transactionResponse.wait();
 
-    console.log("Transaction hash:", receipt.transactionHash);
-    console.log("Transaction confirmed in block:", receipt.blockNumber);
+    console.log("Transaction hash:", receipt?.transactionHash);
+    console.log("Transaction confirmed in block:", receipt?.blockNumber);
 
     alert(`Successfully sent cUSD to ${recipientAddress}`);
-  } catch (error: any) {
-    console.error("Error sending Ether:", error?.message);
-    alert("Error sending Ether. Please check the console for details.");
-  }
+
+
+
+
 };
 
 declare global {
